@@ -1,34 +1,51 @@
 # Adzuna Jobs ETL Pipeline (AWS + Snowflake)
 
-## 📌 Overview
-An end-to-end **cloud ETL pipeline** that ingests job postings from the **Adzuna API**, lands raw JSON in **Amazon S3**, transforms it with **AWS Glue (Spark)**, and loads analytics-ready data into **Snowflake** using **Snowpipe**. The pipeline is automated with **EventBridge** (schedule) and **Step Functions** (orchestration).
+## 📌 Project Overview
+This project implements an **end-to-end Data Engineering ETL pipeline** that ingests job postings from the **Adzuna Jobs API**, stores raw JSON in **Amazon S3**, transforms it with **AWS Glue (Spark)**, and continuously loads curated data into **Snowflake** using **Snowpipe**.
+
+The pipeline is **serverless, automated, and cloud-native**, designed to scale with data volume. It demonstrates how to build a **real-world production-ready ETL system** using modern cloud services.
+
+---
+
+## 🎯 Main Focus
+- **Data Engineering best practices**: raw → curated → warehouse zones  
+- **Automation**: end-to-end workflow with Step Functions + EventBridge  
+- **Real-time loading**: using Snowflake Snowpipe for continuous ingestion  
+- **Scalability**: serverless compute with Lambda & Glue (Spark)  
+
+---
+
+## ✅ Benefits of this Project
+- **Hands-on Cloud Data Engineering**: Covers the full cycle from API → Storage → Transformation → Warehouse  
+- **Analytics-ready dataset**: Job postings data available in Snowflake for querying/reporting  
+- **Reusability**: Framework can be adapted for any public API, not just Adzuna  
+- **Cost-efficient**: Serverless components (Lambda, Glue, Snowpipe) mean you only pay per use  
 
 ---
 
 ## 🏗️ Architecture
 
-![Architecture Diagram](b852656e-dd98-4745-bc5c-cd709bc55309.png)
+![Architecture Diagram]architecture.webp
 
-**Flow**
-1) **EventBridge** triggers daily  
-2) **Step Functions** orchestrate  
-3) **Lambda (Python)** extracts Adzuna API → **S3 (raw)**  
-4) **Glue (Spark)** transforms → **S3 (transformed)**  
-5) **Snowpipe** auto-ingests → **Snowflake** tables
+1. **EventBridge** → Daily schedule trigger  
+2. **Step Functions** → Orchestrates ETL steps  
+3. **Lambda (Python 3.12 + requests layer)** → Extracts data from Adzuna API → Saves raw JSON to S3  
+4. **Glue (Spark)** → Cleans/transforms → Writes curated data to S3  
+5. **Snowpipe** → Auto-ingests transformed data into Snowflake  
 
 ---
 
 ## 🧰 Tech Stack
 - **Source:** Adzuna Jobs API  
-- **AWS:** EventBridge, Step Functions, Lambda (Python 3.12), S3, Glue (Spark)  
-- **Warehouse:** Snowflake + Snowpipe (auto_ingest)  
-- **Lang:** Python (Lambda), PySpark (Glue)
+- **AWS:** Lambda, S3, Glue (Spark), Step Functions, EventBridge  
+- **Warehouse:** Snowflake + Snowpipe  
+- **Language:** Python 3.12 (`requests` for API), PySpark for Glue  
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Complete Setup Guide
 
-### 1) Clone
+### 1. Clone Repository
 ```bash
-git clone https://github.com/hameed980/a.git
+git clone https://github.com/hameed980/Adzuna-ETL-pipeline-AWS-and-Snowflake.git
 cd adzuna-etl-pipeline
