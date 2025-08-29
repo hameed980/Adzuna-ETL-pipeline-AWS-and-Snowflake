@@ -25,7 +25,7 @@ The pipeline is **serverless, automated, and cloud-native**, designed to scale w
 
 ## 🏗️ Architecture
 
-![Architecture Diagram]architecture.webp
+![Architecture Diagram](./architecture.webp)
 
 1. **EventBridge** → Daily schedule trigger  
 2. **Step Functions** → Orchestrates ETL steps  
